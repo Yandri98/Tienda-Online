@@ -43,7 +43,7 @@
 	                    $('.alert').slideDown();
 	                    setTimeout(function(){ $('.alert').slideUp(); }, 10000);
 	                </script>
-	            </div>           }
+	            </div>           
 	        </div>
 	        @endif  
 	<div class="footer mtop16">

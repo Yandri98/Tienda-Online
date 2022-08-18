@@ -22,10 +22,10 @@
 				<a href="{{ url('/') }}"><i class="fa-solid fa-house"></i> Dashboard</a>
 			</li>
 			<li>	
-				<a href="{{ url('/users') }}"><i class="fa-solid fa-users"></i> Usuarios</a>
+				<a href="{{ url('admin/users') }}"><i class="fa-solid fa-users"></i> Usuarios</a>
 				</li>
 			<li>
-				<a href="{{ url('/products') }}"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
+				<a href="{{ url('admin/products') }}"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
 			</li>
 		</ul>
 	</div>
