@@ -60,24 +60,50 @@
 				</div>
 
 				<div class="col-md-3">
-					<label for="discount">¿En descuento?:</label>
+					<label for="indiscount">¿En descuento?:</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">		
+								<i class="fa-solid fa-tag"></i>
+							</span>
+						</div>
+					{!! Form::select('indiscount', ['0' => 'No', '1' => 'Si'], 0, ['class'=> 'custom-select']) !!}
+					</div>
+				</div>
+
+
+				<div class="col-md-3">
+					<label for="discount">Descuento:</label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">		
 								<i class="fa-solid fa-percent"></i>
 							</span>
 						</div>
-					{!! Form::select('discount', ['0' => 'No', '1' => 'Si'], 0, ['class'=> 'custom-select']) !!}
+					{!! Form::number('discount', 0.00,  ['class'=> 'form-control','step','any']) !!}
 					</div>
 				</div>
+
+
 			</div>	
+
+
 		
 			<div class="row mtop16">
 				<div class="col-md-12">
 					<label for="content">Descripción del producto:</label>
-					{!! Form::textarea('content', null, ['class'=> 'form-control']) !!}
+					{!! Form::textarea('content', null, ['class'=> 'form-control'])
+					 !!}
+					 <script>CKEDITOR.replace( 'content' );</script>
 				</div>
 			</div>
+
+			<div class="row mtop16">
+				<div class="col-md-12">
+					{!! Form::submit('Guardar',['class'=>'btn btn-success']) !!}
+				</div>
+			</div>
+
 			{!! Form::close() !!}
 			
 		</div>    

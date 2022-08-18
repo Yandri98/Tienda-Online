@@ -27,6 +27,9 @@
 			<li>
 				<a href="{{ url('admin/products') }}"><i class="fa-solid fa-boxes-stacked"></i> Productos</a>
 			</li>
+			<li>
+				<a href="{{ url('admin/categories') }}"><i class="fa-solid fa-table-cells"></i></i> Categorías</a>
+			</li>
 		</ul>
 	</div>
 	
