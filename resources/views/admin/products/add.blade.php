@@ -12,10 +12,10 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="titte"><i class="fas fa-plus"></i> Agregar Producto</h2>
+			<h2 class="title"><i class="fas fa-plus"></i> Agregar Producto</h2>
 		</div>
 		<div class="inside">
-			{!! Form::open(['url'=>'admin/product/add']) !!}
+			{!! Form::open(['url'=>'admin/product/add', 'files'=> true]) !!}
 			<div class="row">
 				<div class="col-md-6">
 					<label for="name">Nombre del producto:</label>
@@ -28,7 +28,15 @@
 				</div>
 
 				<div class="col-md-3">
-					<label for="name">Categoría</label>
+					<label for="category">Categoría</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">
+								<i class="fa-solid fa-table-cells"></i>
+							</span>
+						</div>
+					{!! Form::select('category',$cats, 0, ['class'=> 'custom-select']) !!}
+					</div>	
 				</div>
 				<div class="col-md-3">
 					<label for="name">Imagen del Producto</label>
@@ -39,7 +47,8 @@
 						</span>
 					</div>
 					<div class="custom-file">
-					{!! Form::file('img',['class'=>'custom-file-input', 'id'=>'customFile']) !!}
+					{!! Form::file('img',['class'=>'custom-file-input', 'id'=>'customFile',
+					'accept'=> 'image/*']) !!}
 					<label class="custom-file-label" for="customFile">Cargar la imagen</label>
 					</div>
 					</div>

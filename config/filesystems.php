@@ -55,6 +55,12 @@ return [
             'visibility' => 'public',
         ],
 
+          'uploads' => [
+            'driver' => 'local',
+            'root' => 'C:/xampp/tdocs/Tienda/public/uploads', //Al poner en producción se debe cambiar la ruta
+           
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
