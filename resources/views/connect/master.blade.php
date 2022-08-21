@@ -11,7 +11,7 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <script src="https://kit.fontawesome.com/b0d8aefb17.js" crossorigin="anonymous"></script>
 
-    <title>@yield('tittle')</title>
+    <title>@yield('title')</title>
 </head>
 <body>
 

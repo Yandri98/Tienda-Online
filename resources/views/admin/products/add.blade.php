@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('tittle','Agregar Productos')
+@section('title','Agregar Productos')
 @section('breadcrumb')
 <li class="breadcrumb-item">
 	<a href="{{ url('/admin/products') }}"><i class="fas fa-boxes"></i> Productos</a>

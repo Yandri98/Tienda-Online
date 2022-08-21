@@ -1,5 +1,5 @@
 @extends('connect.master')
-@section('tittle','Login')
+@section('title','Login')
 
 
 @section('content')

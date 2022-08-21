@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('tittle','Usuarios')
+@section('title','Usuarios')
 @section('breadcrumb')
 <li class="breadcrumb-item">
 	<a href="{{ url('/admin/users') }}"><i class="fa-solid fa-users"></i> Usuarios</a>
@@ -10,7 +10,7 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="titte"><i class="fa-solid fa-users"></i> Usuarios</h2>
+			<h2 class="title"><i class="fa-solid fa-users"></i> Usuarios</h2>
 		</div>
 		<div class="inside">
 			<table class="table">

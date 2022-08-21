@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('tittle','Productos')
+@section('title','Productos')
 @section('breadcrumb')
 <li class="breadcrumb-item">
 	<a href="{{ url('/admin/products') }}"><i class="fas fa-boxes"></i> Productos</a>
@@ -9,7 +9,7 @@
 <div class="container-fluid">
 	<div class="panel shadow">
 		<div class="header">
-			<h2 class="titte"><i class="fas fa-boxes"></i> Productos</h2>
+			<h2 class="title"><i class="fas fa-boxes"></i> Productos</h2>
 		</div>
 		<div class="inside">
 
