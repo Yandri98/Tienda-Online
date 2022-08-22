@@ -57,7 +57,7 @@ return [
 
           'uploads' => [
             'driver' => 'local',
-            'root' => 'C:/xampp/tdocs/Tienda/public/uploads', //Al poner en producción se debe cambiar la ruta
+            'root' => 'C:/xampp/htdocs/Tienda/public/uploads' //Al poner en producción se debe cambiar la ruta
            
         ],
 

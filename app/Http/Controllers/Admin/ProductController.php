@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\Category;
 use App\Http\Models\Product;
-use Validator, Str, Config;
+use Validator, Str, Config, Image;
 
 class ProductController extends Controller
 {
@@ -48,25 +48,36 @@ class ProductController extends Controller
         else:
             $path = '/'.date('Y-m-d'); //fecha en que se subio la imagen o el folder
             $fileExt = trim($request->file('img')->getClientOriginalExtension());
-            $upload_path = Config::get('filesystem.disk.uploads.root'); //Se guarda en el servidor 
+            $upload_path = Config::get('filesystems.disks.uploads.root'); //Se guarda en el servidor 
             $name = Str::slug(str_replace($fileExt, '', $request->file('img')->getClientOriginalName()));
             $filename =  rand(1,999).'-'.$name.'.'.$fileExt;
-            return $filename;    
-
+            $file_file = $upload_path.'/'.$path.'/'.$filename;
+        
+            
             $product = new Product;
             $product->status = '0';
             $product->name = e($request->input('name'));
             $product->slug = Str::slug($request->input('name'));
             $product->category_id = $request->input('category');
-            $product->image = "image.png";
+            $product->file_path = date('Y-m-d');
+            $product->image = $filename;
             $product->price= $request->input('price');
             $product->in_discount= $request->input('indiscount');
             $product->discount= $request->input('discount'); 
             $product->content = e($request->input('content'));
+
             if($product->save()):
+                if($request->hasFile('img')):
+                    $fl = $request->img->storeAs($path, $filename, 'uploads');
+                    $img = Image::make($file_file);
+                    $img->fit(256, 256, function($constraint){ //Otro metodo es resize, para achicar la imagen
+                        $constraint->upsize();
+                    });
+                    $img->save($upload_path.'/'.$path.'/t_'.$filename);
+                endif;
                 return redirect('/admin/products')->with('message','Guardado con éxito')->with('typealert','success');
             endif;
-        endif;
+        endif;  //Si genera el error Disk [uploads] does not have a configured driver. Se debe limpiar y configurar la cache. con "php artisan config:cache".
 
     }
 }
