@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
-	<link rel="stylesheet" href="{{ url('/static/css/admin.css?'.time()) }}">
+	<link rel="stylesheet" href="{{ url('/static/css/admin.css?v='.time()) }}">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/b0d8aefb17.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
 		<!--script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>-->
 	<script src="{{ url('/static/libs/ckeditor/ckditor.js') }}"></script>
-	<script src="{{ url('/static/js/admin.js') }}"></script>
+	<script src="{{ url('/static/js/admin.js?v='.time())}}"></script>
 
 
 	<script>

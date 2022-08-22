@@ -12,13 +12,13 @@
 		<div class="col-md-9">	
 			<div class="panel shadow">
 		<div class="header">
-			<h2 class="title"><i class="fas fa-plus"></i> Editar Producto</h2>
+			<h2 class="title"><i class="fa-solid fa-pen-to-square"></i> Editar Producto</h2>
 		</div>
 		<div class="inside">
-			{!! Form::open(['url'=>'admin/product/add', 'files'=> true]) !!}
+			{!! Form::open(['url'=>'admin/product/'.$product->id.'/edit', 'files'=> true]) !!}
 			<div class="row">
 				<div class="col-md-6">
-					<label for="name">Nombre del producto:</label>
+					<label for="name"><b>Nombre del producto:</b></label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-keyboard"></i></span>
@@ -28,7 +28,7 @@
 				</div>
 
 				<div class="col-md-3">
-					<label for="category">Categoría</label>
+					<label for="category"><b>Categoría:</b></label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">
@@ -39,7 +39,7 @@
 					</div>	
 				</div>
 				<div class="col-md-3">
-					<label for="name">Imagen del Producto</label>
+					<label for="name"><b>Imagen del Producto:</b></label>
 					<div class="input-group">
 					<div class="input-group-prepend" id="basic-addon1">	
 						<span class="input-group-text" id="basic-addon1">	
@@ -57,7 +57,7 @@
 
 			<div class="row mtop16">
 				<div class="col-md-3">
-					<label for="price">Precio:</label>
+					<label for="price"><b>Precio:</b></label>
 					<div class="input-group">
 					<div class="input-group-prepend" id="basic-addon1">	
 						<span class="input-group-text" id="basic-addon1">	
@@ -69,7 +69,7 @@
 				</div>
 
 				<div class="col-md-3">
-					<label for="indiscount">¿En descuento?:</label>
+					<label for="indiscount"><b>¿En descuento?:</b></label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">		
@@ -82,7 +82,7 @@
 
 
 				<div class="col-md-3">
-					<label for="discount">Descuento:</label>
+					<label for="discount"><b>Descuento:</b></label>
 					<div class="input-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text" id="basic-addon1">		
@@ -93,14 +93,24 @@
 					</div>
 				</div>
 
+				<div class="col-md-3">
+					<label for="status"><b>Estado:</b></label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">		
+								<i class="fa-solid fa-ban"></i>
+							</span>
+						</div>
+					{!! Form::select('status', ['0' => 'Desactivado', '1' => 'Activado'], $product->status, ['class'=> 'custom-select']) !!}
+					</div>
+				</div>
 
-			</div>	
 
-
-		
+			</div>
+			
 			<div class="row mtop16">
 				<div class="col-md-12">
-					<label for="content">Descripción del producto:</label>
+					<label for="content"><b>Descripción del producto:</b></label>
 					{!! Form::textarea('content', $product->content, ['class'=> 'form-control'])
 					 !!}
 					 <script>CKEDITOR.replace( 'content' );</script>
@@ -110,6 +120,7 @@
 			<div class="row mtop16">
 				<div class="col-md-12">
 					{!! Form::submit('Guardar',['class'=>'btn btn-success']) !!}
+
 				</div>
 			</div>
 
@@ -121,11 +132,26 @@
 	<div class="col-md-3">
 		<div class="panel shadow">
 			<div class="header">
-			<h2 class="title"><i class="fa-solid fa-image" style="color: red;"></i>Imagen del Producto</h2>
+			<h2 class="title"><i class="fa-solid fa-image" style="color: black;"></i><b>Imagen Destacada</b></h2>
 			<div class="inside">
 				<img src="{{url('/uploads/'.$product->file_path.'/'.$product->image)}}"class="img-fluid">
 			</div>
 		</div>
+		</div>
+		<div class="panel shadow mtop16">
+			<div class="header">
+
+			<h2 class="title"><i class="fa-solid fa-images" style="color:black;"></i><b>Galeria</b></h2>
+			</div>
+			<div class="inside product_gallery">
+				{!! Form::open(['url'=>'/admin/product/'.$product->id.'/gallery/add', 'files'=>true]) !!}
+				{!! Form::file('file_image',['id'=> 'product_file_image','accept'=> 'image/*',
+				'style'=>'display: none;']) !!}
+				{!! Form::close() !!}
+				<div class="tumb">
+					<a href="#" id="btn_product_file_image"><i class="fa-solid fa-circle-plus"></i></a>
+				</div>
+			</div> 
 		</div>
 	</div>
 </div>
