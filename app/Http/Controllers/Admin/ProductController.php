@@ -17,7 +17,9 @@ class ProductController extends Controller
     }
 
     public function getHome(){
-        return view('admin.products.home');
+        $products = Product::orderBy('id', 'desc')->paginate(25);
+        $data =['products'=> $products];    
+        return view('admin.products.home', $data);
     } 
 
     public function getProductAdd(){
@@ -79,5 +81,12 @@ class ProductController extends Controller
             endif;
         endif;  //Si genera el error Disk [uploads] does not have a configured driver. Se debe limpiar y configurar la cache. con "php artisan config:cache".
 
+    }
+
+    public function getProductEdit($id){ //Editar Productos
+        $product = Product::find($id);
+        $cats = Category::where('module','0')->pluck('name','id');
+        $data = ['cats' => $cats, 'product'=>$product];
+         return view('admin.products.edit', $data);
     }
 }

@@ -85,7 +85,7 @@
 							</a>
 							<a href="{{ url('/admin/category/'.$cat->id.'/delete') }}"
 								data-placement="top" title="Editar">
-								<i class="fa-solid fa-trash-can"></i>
+								<i class="fa-solid fa-trash-can" style="color: red;"></i>
 							</a">
 			  							
 
