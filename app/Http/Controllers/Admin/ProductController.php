@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Models\Category;
+use App\Http\Models\Category, App\Http\Models\PGallery;
 use App\Http\Models\Product;
 use Validator, Str, Config, Image;
 
@@ -144,4 +144,64 @@ class ProductController extends Controller
             endif;
         endif;
     }
+
+    public function postProductGalleryAdd ($id, Request $request){
+        $rules = [
+            'file_image'=> 'required',
+        ];
+
+        $message = [
+            'file_image.required'=>'Cargue una imagen',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
+        if ($validator->fails()):
+             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+         else:
+            if($request->hasFile('file_image')):
+                $path = '/'.date('Y-m-d'); //fecha en que se subio la imagen o el folder
+                $fileExt = trim($request->file('file_image')->getClientOriginalExtension());
+                $upload_path = Config::get('filesystems.disks.uploads.root'); //Se guarda en el servidor 
+                $name = Str::slug(str_replace($fileExt, '', $request->file('file_image')->getClientOriginalName()));
+                $filename =  rand(1,999).'-'.$name.'.'.$fileExt;
+                $file_file = $upload_path.'/'.$path.'/'.$filename;
+                 $gallery = new PGallery;
+                 $gallery->product_id = $id; 
+                 $gallery->file_path = date('Y-m-d');
+                 $gallery->file_name = $filename;
+
+                 if($gallery->save()):
+                    if($request->hasFile('file_image')):
+                        $fl = $request->file_image->storeAs($path, $filename, 'uploads');
+                        $img = Image::make($file_file);
+                        $img->fit(256, 256, function($constraint){ //Otro metodo es resize, para achicar la imagen
+                            $constraint->upsize();
+                        });
+                        $img->save($upload_path.'/'.$path.'/t_'.$filename);
+                    endif;
+                    return back()->with('message','Guardado con éxito')->with('typealert','success');
+                endif;
+            endif;
+         endif;
+          
+    }
+
+
+   function getProductGalleryDelete ($id, $gid){
+        $gallery = PGallery::findOrFail($gid);
+        $path = $gallery->file_path;
+        $file = $gallery->file_name;
+        $upload_path = Config::get('filesystems.disks.uploads.root');
+        if($gallery->product_id != $id){
+            return back()->with('message','No se puede eliminar')->with('typealert','danger');
+        } else{
+            if($gallery->delete()):
+                 unlink($upload_path.'/'.$path.'/'.$file); //Borrar la foto de manera local
+                  unlink($upload_path.'/'.$path.'/t_'.$file);
+                 return back()->with('message','Imagen eliminada con éxito')->with('typealert','success');
+            endif;
+        }
+    }
+
+
 }

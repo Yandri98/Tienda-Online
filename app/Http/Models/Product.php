@@ -13,6 +13,10 @@ class Product extends Model
     protected $hidden = ['created_at','update_at']; //Ocultar todos los campos dentro del arrglo
 
     public function cat(){
-        return $this->hasOne(Category::class, 'id','category_id'); //relación del modelo categoria con producto
+        return $this->hasOne(Category::class, 'id','category_id'); //relación del modelo categoria con producto. relacion de 1 a 1 
+    }
+
+    public function getGallery (){ 
+        return $this->hasMany(PGallery::class, 'product_id','id');//Relacion de la tabla galeria con la tabla producto de 1 a muchos.
     }
 }

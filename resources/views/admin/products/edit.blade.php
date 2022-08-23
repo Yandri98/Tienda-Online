@@ -144,12 +144,25 @@
 			<h2 class="title"><i class="fa-solid fa-images" style="color:black;"></i><b>Galeria</b></h2>
 			</div>
 			<div class="inside product_gallery">
-				{!! Form::open(['url'=>'/admin/product/'.$product->id.'/gallery/add', 'files'=>true]) !!}
+				{!! Form::open(['url'=>'/admin/product/'.$product->id.'/gallery/add', 'files'=>true, 'id'=>'form_product_gallery']) !!}
 				{!! Form::file('file_image',['id'=> 'product_file_image','accept'=> 'image/*',
-				'style'=>'display: none;']) !!}
+				'style'=>'display: none;','required']) !!}
 				{!! Form::close() !!}
-				<div class="tumb">
+				<div class="btn-submit">
 					<a href="#" id="btn_product_file_image"><i class="fa-solid fa-circle-plus"></i></a>
+				</div>
+
+				<div class="tumbs">
+					@foreach($product->getGallery as $img)
+					<div class="tumb">
+						<a href="{{ url('/admin/product/'.$product->id.'/gallery/'.$img->id.'/delete') }}" data-toggle="tooltip"
+								data-placement="top" title="Eliminar">
+								<i class="fa-solid fa-trash-can"></i>
+						</a>
+						<img src="{{ url('/uploads/'.$img->file_path.'/t_'.$img->file_name) }}">
+					</div>
+					@endforeach
+
 				</div>
 			</div> 
 		</div>
